@@ -27,8 +27,28 @@ public class Outputs {
         ImprimirPeca(peca);
         System.out.println("Você fará a primeira jogada");
     }
+    
+    public void ImprimirMesa(Lista PecasJogadas){
+ 	   	No atual = PecasJogadas.getInicio();
+	    while (atual!=null){
+	    	ImprimirPeca(atual.peca);
+	        atual=atual.proximo;
+	    }
+    }
 
-    public  void ImprimirPeca(Peca peca){
+    public void ImprimirPeca(Peca peca){
         System.out.println(peca.toString());
+    }
+    
+    public void ImprimirPecaAoContrario(Peca peca){
+        StringBuilder sb = new StringBuilder();
+        sb.append(" -------\n");
+        sb.append("| ").append(peca.getNumero2());
+        sb.append("     |\n");
+        sb.append("|  ___  |\n");
+        sb.append("|       |\n");
+        sb.append("|     ").append(peca.getNumero1()).append(" |\n");
+        sb.append(" -------\n");
+        System.out.println(sb.toString());
     }
 }

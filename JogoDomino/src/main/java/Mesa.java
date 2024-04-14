@@ -9,7 +9,13 @@ public class Mesa {
         this.PecasComputador = PecasComputador;
 
     }
-    public void RegistrarJogada(Peca peca){
+    public void RegistrarJogadaInicial(Peca peca){
+        PecasJogadas.inserir(peca);
+    }
+    public void RegistrarJogadaNum1(Peca peca){
+        PecasJogadas.inserirNoComeco(peca);
+    }
+    public void RegistrarJogadaNum2(Peca peca){
         PecasJogadas.inserir(peca);
     }
 }

@@ -13,21 +13,20 @@ public class Jogo {
        if(identificador[0].equals("humano")){
            MaiorPeca=pecasHumano.IdentificarPecaPorIndice(Integer.parseInt(identificador[1]));
            outputs.HumanoMaiorPeca(MaiorPeca);
-           mesa.RegistrarJogada(MaiorPeca);
+           mesa.RegistrarJogadaInicial(MaiorPeca);
            pecasHumano.removerPeca(MaiorPeca);
+           JogadaDoComputador(mesa, pecasComputador, mesa.PecasJogadas.getInicio().peca);
 
        }
        else if(identificador[0].equals("computador")) {
            MaiorPeca=pecasComputador.IdentificarPecaPorIndice(Integer.parseInt(identificador[1]));
            outputs.ComputadorMaiorPeca(MaiorPeca);
-           mesa.RegistrarJogada(MaiorPeca);
+           mesa.RegistrarJogadaInicial(MaiorPeca);
            pecasComputador.removerPeca(MaiorPeca);
        }
-
-
    }
 
-    public Lista gerarPecas(int quantidade) {
+   public Lista gerarPecas(int quantidade) {
         Lista pecas = new Lista();
         Random rand = new Random();
         for (int i = 0; i < quantidade; i++) {
@@ -66,6 +65,41 @@ public class Jogo {
        }
        else{
            return "humano," + indiceMaiorPecaHumano;
+       }
+   }
+   
+   public void JogadaDoComputador(Mesa mesa, Lista PecasComputador, Peca pecaAtual) {
+	   Outputs outputs = new Outputs();
+	   No atual = PecasComputador.getInicio();
+	   
+       while (atual!=null){
+           if(atual.peca.getNumero1() == pecaAtual.getNumero1()){
+        	   atual.peca.InverterPeca();
+        	   mesa.RegistrarJogadaNum1(atual.peca);
+        	   outputs.ImprimirMesa(mesa.PecasJogadas);
+        	   return;
+           }
+           else if (atual.peca.getNumero2() == pecaAtual.getNumero1()) {
+        	   mesa.RegistrarJogadaNum1(atual.peca);
+        	   outputs.ImprimirMesa(mesa.PecasJogadas);
+        	   return;
+           }
+           atual=atual.proximo;
+       }
+       
+       while (atual!=null){
+           if(atual.peca.getNumero1() == pecaAtual.getNumero2()){
+        	   mesa.RegistrarJogadaNum2(atual.peca);
+        	   outputs.ImprimirMesa(mesa.PecasJogadas);
+        	   return;
+           }
+           else if (atual.peca.getNumero2() == pecaAtual.getNumero2()) {
+        	   atual.peca.InverterPeca();
+        	   mesa.RegistrarJogadaNum2(atual.peca);
+        	   outputs.ImprimirMesa(mesa.PecasJogadas);
+        	   return;
+           }
+           atual=atual.proximo;
        }
    }
 }

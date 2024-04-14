@@ -17,6 +17,14 @@ public class Peca {
     public boolean contemNumero(int numero) {
         return numero1 == numero || numero2 == numero;
     }
+    
+    public void InverterPeca() {
+    	int num1 = this.numero1;
+    	int num2 = this.numero2;
+    	
+    	this.numero1 = num2;
+    	this.numero2 = num1;
+    }
 
     // Método para imprimir a peça de forma legível
     @Override
