@@ -1,6 +1,7 @@
 public class Lista {
     private No inicio; // Referência para o primeiro nó da lista
     private No ultimo; // Referência para o último nó da lista
+
     private int tamanho;// Referência para o tamanho da lista
 
     public No getInicio() {
@@ -45,6 +46,7 @@ public class Lista {
             novoNo.anterior = ultimo; // O nó anterior do novo nó é o antigo último nó
             ultimo = novoNo; // O novo nó agora é o último nó da lista
         }
+
     }
     
     public void inserirNoComeco(Peca peca) {
@@ -88,5 +90,40 @@ public class Lista {
     public void Imprimir() {
     	Outputs otp = new Outputs();
     	otp.imprimirLista(inicio);
+    }
+
+    public int BuscarIndice(Peca peca){
+        int indice = 0;
+        No noAtual = this.inicio;
+        while (noAtual!=null){
+            if(noAtual.peca.equals(peca)){
+                return indice;
+            }
+            else {
+                indice++;
+                noAtual=noAtual.proximo;
+            }
+        }
+        return -1;
+    }
+    public Peca IdentificarPecaPorIndice(int indice){
+        No noAtual = this.inicio;
+        int indiceAtual=0;
+        if(indice==0){
+            return noAtual.peca;
+        }
+        else {
+            noAtual= noAtual.proximo;
+            while (noAtual!=null){
+                indiceAtual++;
+                if(indice==indiceAtual){
+                    return noAtual.peca;
+                }
+                else {
+                    noAtual = noAtual.proximo;
+                }
+            }
+        }
+        return null;
     }
 }
