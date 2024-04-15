@@ -51,4 +51,25 @@ public class Outputs {
         sb.append(" -------\n");
         System.out.println(sb.toString());
     }
+    public void exibirMenu(){
+        System.out.println("******************");
+        System.out.println("*     MENU       *");
+        System.out.println("******************");
+        System.out.println("* 1. Jogar       *");
+        System.out.println("* 2. Passar a vez*");
+        System.out.println("******************");
+        System.out.println("Escolha uma opção:");
+    }
+    public void VezHumano(){
+        System.out.println("Sua vez de jogar...");
+        System.out.println("Aqui estão suas peças disponíveis");
+    }
+    public void VezComputador(){
+     System.out.println("O computador irá jogar...");
+    }
+    public void SolicitarPecaHumano(){
+        System.out.println("Digite o indíce da peça a ser jogada");
+        System.out.println("Exemplo: primeira peça da lista de peças disponiveis - indice = 0, segunda - indice = 1, etc");
+
+    }
 }

@@ -3,6 +3,7 @@ import java.util.Random;
 public class Jogo {
 
    public void IniciarJogo(){
+       Menu menu = new Menu();
        Outputs outputs = new Outputs();
        Lista pecasHumano = gerarPecas(14);
        Lista pecasComputador = gerarPecas(14);
@@ -24,6 +25,49 @@ public class Jogo {
            mesa.RegistrarJogadaInicial(MaiorPeca);
            pecasComputador.removerPeca(MaiorPeca);
        }
+
+       while (pecasHumano.getInicio()!=null || pecasComputador.getInicio()!=null){
+           outputs.VezHumano();
+           pecasHumano.Imprimir();
+           int opcao= menu.ApresentarMenu();
+           if(opcao == 1){
+            Peca pecaSelecionada=pecasHumano.IdentificarPecaPorIndice(menu.SolicitarPecaHumano());
+            Peca pecaInicio = mesa.PecasJogadas.getInicio().peca;
+            Peca pecaFim = mesa.PecasJogadas.getUltimo().peca;
+            if(pecaInicio.contemNumero(pecaSelecionada.getNumero2())){
+                if(pecaSelecionada.getNumero2() != pecaInicio.getNumero1()){
+                    int num1 = pecaSelecionada.getNumero2();
+                    int num2 = pecaSelecionada.getNumero1();
+                    pecaSelecionada.setNumero1(num1);
+                    pecaSelecionada.setNumero2(num2);
+                }
+                mesa.RegistrarJogadaNum1(pecaSelecionada);
+
+            }
+            else if (pecaFim.contemNumero(pecaSelecionada.getNumero1())){
+                if(pecaFim.getNumero2() != pecaSelecionada.getNumero1()){
+                    int num1 = pecaSelecionada.getNumero2();
+                    int num2 = pecaSelecionada.getNumero1();
+                    pecaSelecionada.setNumero1(num1);
+                    pecaSelecionada.setNumero2(num2);
+                }
+                mesa.RegistrarJogadaNum2(pecaSelecionada);
+
+            }
+
+            pecasHumano.removerPeca(pecaSelecionada);
+            mesa.PecasJogadas.Imprimir();
+            outputs.VezComputador();
+            JogadaDoComputador(mesa, pecasComputador, mesa.PecasJogadas.getInicio().peca);
+
+           }
+           else if(opcao==2){
+             outputs.VezComputador();
+             mesa.PecasJogadas.Imprimir();
+           }
+
+       }
+
    }
 
    public Lista gerarPecas(int quantidade) {
