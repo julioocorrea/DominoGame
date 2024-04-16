@@ -87,4 +87,7 @@ public class Outputs {
 				 + "\n   A partida empatou\n"
 				 + "----------------------------------\n");
     }
+    public void PecaIncorreta(){
+        System.out.println("Peça inválida! Passou a vez");
+    }
 }
