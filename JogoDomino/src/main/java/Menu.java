@@ -11,7 +11,5 @@ public class Menu {
         outputs.SolicitarPecaHumano();
         return inputs.LerOpcao();
     }
-    public void pecaInvalida(){
-        outputs.PecaIncorreta();
-    }
+
 }
