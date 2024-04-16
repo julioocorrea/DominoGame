@@ -87,4 +87,5 @@ public class Outputs {
 				 + "\n   A partida empatou\n"
 				 + "----------------------------------\n");
     }
+  
 }
