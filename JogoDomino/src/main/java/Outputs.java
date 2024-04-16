@@ -72,4 +72,19 @@ public class Outputs {
         System.out.println("Exemplo: primeira peça da lista de peças disponiveis - indice = 0, segunda - indice = 1, etc");
 
     }
+    public void computadorVenceu() {
+		System.out.println("\n----------------------------------"
+				 + "\n   O computador venceu a partida\n"
+				 + "----------------------------------\n");
+    }
+    public void HumanoVenceu() {
+		System.out.println("\n----------------------------------"
+				 + "\n   Você venceu a partida\n"
+				 + "----------------------------------\n");
+    }
+    public void Empate() {
+		System.out.println("\n----------------------------------"
+				 + "\n   A partida empatou\n"
+				 + "----------------------------------\n");
+    }
 }

@@ -16,7 +16,7 @@ public class Jogo {
            outputs.HumanoMaiorPeca(MaiorPeca);
            mesa.RegistrarJogadaInicial(MaiorPeca);
            pecasHumano.removerPeca(MaiorPeca);
-           JogadaDoComputador(mesa, pecasComputador, mesa.PecasJogadas.getInicio().peca);
+           JogadaDoComputador(mesa);
 
        }
        else if(identificador[0].equals("computador")) {
@@ -58,14 +58,18 @@ public class Jogo {
             pecasHumano.removerPeca(pecaSelecionada);
             mesa.PecasJogadas.Imprimir();
             outputs.VezComputador();
-            JogadaDoComputador(mesa, pecasComputador, mesa.PecasJogadas.getInicio().peca);
-
+            JogadaDoComputador(mesa);
            }
            else if(opcao==2){
              outputs.VezComputador();
-             mesa.PecasJogadas.Imprimir();
+             JogadaDoComputador(mesa);
            }
 
+           if(!mesa.ValidarSeTemJogadasPossiveis()) {
+        	   mesa.VerificarGanhador();
+        	   break;
+           }
+           
        }
 
    }
@@ -112,19 +116,23 @@ public class Jogo {
        }
    }
    
-   public void JogadaDoComputador(Mesa mesa, Lista PecasComputador, Peca pecaAtual) {
+   public void JogadaDoComputador(Mesa mesa) {
 	   Outputs outputs = new Outputs();
-	   No atual = PecasComputador.getInicio();
+	   No atual = mesa.PecasComputador.getInicio();
+	   Peca pecaPontaCima = mesa.PecasJogadas.getInicio().peca;
+	   Peca pecaPontaBaixo = mesa.PecasJogadas.getUltimo().peca;
 	   
        while (atual!=null){
-           if(atual.peca.getNumero1() == pecaAtual.getNumero1()){
+           if(atual.peca.getNumero1() == pecaPontaCima.getNumero1()){
         	   atual.peca.InverterPeca();
         	   mesa.RegistrarJogadaNum1(atual.peca);
+        	   mesa.PecasComputador.removerPeca(atual.peca);
         	   outputs.ImprimirMesa(mesa.PecasJogadas);
         	   return;
            }
-           else if (atual.peca.getNumero2() == pecaAtual.getNumero1()) {
+           else if (atual.peca.getNumero2() == pecaPontaCima.getNumero1()) {
         	   mesa.RegistrarJogadaNum1(atual.peca);
+        	   mesa.PecasComputador.removerPeca(atual.peca);
         	   outputs.ImprimirMesa(mesa.PecasJogadas);
         	   return;
            }
@@ -132,18 +140,21 @@ public class Jogo {
        }
        
        while (atual!=null){
-           if(atual.peca.getNumero1() == pecaAtual.getNumero2()){
+           if(atual.peca.getNumero1() == pecaPontaBaixo.getNumero2()){
         	   mesa.RegistrarJogadaNum2(atual.peca);
+        	   mesa.PecasComputador.removerPeca(atual.peca);
         	   outputs.ImprimirMesa(mesa.PecasJogadas);
         	   return;
            }
-           else if (atual.peca.getNumero2() == pecaAtual.getNumero2()) {
+           else if (atual.peca.getNumero2() == pecaPontaBaixo.getNumero2()) {
         	   atual.peca.InverterPeca();
         	   mesa.RegistrarJogadaNum2(atual.peca);
+        	   mesa.PecasComputador.removerPeca(atual.peca);
         	   outputs.ImprimirMesa(mesa.PecasJogadas);
         	   return;
            }
            atual=atual.proximo;
        }
+       
    }
 }
